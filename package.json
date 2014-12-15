@@ -17,10 +17,9 @@
   },
   "jest": {
     "testDirectoryName": "test",
-    "scriptPreprocessor": "src/coffee-processor.js",
+    "scriptPreprocessor": "test/coffee-processor.js",
     "testFileExtensions": [
-      "coffee",
-      "js"
+      "coffee"
     ]
   },
   "dependencies": {
