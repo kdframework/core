@@ -1,0 +1,28 @@
+{
+  "name": "kdf-core",
+  "version": "0.0.0",
+  "description": "Core module of KDFramework",
+  "main": "index.js",
+  "directories": {
+    "test": "jest"
+  },
+  "scripts": {
+    "test": "node ./node_modules/jest-cli/bin/jest.js"
+  },
+  "author": "Umut Sirin <umut@koding.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "coffee-script": "^1.8.0",
+    "jest-cli": "^0.2.0"
+  },
+  "jest": {
+    "testDirectoryName": "test",
+    "scriptPreprocessor": "src/coffee-processor.js",
+    "testFileExtensions": [
+      "coffee",
+      "js"
+    ]
+  },
+  "dependencies": {
+  }
+}
