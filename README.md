@@ -10,7 +10,7 @@
 user = new KDObject { id: 'user-1' }, { name: 'John Doe' }
 message = new KDObject { id: 1, delegate: user }, { text: 'Hello world!' }
 
-{ id } = object.getDelegate()
+{ id } = message.getDelegate()
 
 console.log id # => 'user-1'
 
