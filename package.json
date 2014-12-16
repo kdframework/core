@@ -1,8 +1,12 @@
 {
   "name": "kdf-core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Core module of KDFramework",
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kdframework/core"
+  },
   "directories": {
     "test": "jest"
   },
@@ -18,6 +22,10 @@
   "jest": {
     "testDirectoryName": "test",
     "scriptPreprocessor": "test/coffee-processor.js",
+    "moduleFileExtensions": [
+      "coffee",
+      "js"
+    ],
     "testFileExtensions": [
       "coffee"
     ]
