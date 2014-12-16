@@ -2,7 +2,7 @@
   "name": "kdf-core",
   "version": "0.0.2",
   "description": "Core module of KDFramework",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "test": "jest"
   },
