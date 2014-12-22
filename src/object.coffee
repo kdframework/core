@@ -1,6 +1,27 @@
 module.exports = class KDObject
 
   ###*
+   * Includes given `MixinClass` protoype
+   * into this classes protoype. Provides an
+   * easy way to share prototype methods between
+   * classes.
+   *
+   * @param {function(new:Object)} MixinClass - Class to be mixed to prototype.
+   * @param {Boolean} callConstructor - Flag for deciding to call constructor of `MixinClass`
+  ###
+  @include = (MixinClass, callConstructor = yes) ->
+
+    extend = (target, source) ->
+
+      target[key] = value  for own key, value of source when key isnt 'constructor'
+
+    extend this, MixinClass
+    extend @prototype, MixinClass.prototype
+
+    MixinClass.call @prototype  if callConstructor
+
+
+  ###*
    * @constructor KDObject
    *
    * @param {Object}    options - Object options.
