@@ -1,4 +1,11 @@
 
+0.0.5 / 2014-12-22
+==================
+
+ * package.json: Increase version - 0.0.5
+ * object: add include method to mixin other classes
+ * add .travis.yml
+
 0.0.1 / 2014-12-15
 ==================
 

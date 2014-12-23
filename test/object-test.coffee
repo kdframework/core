@@ -1,8 +1,68 @@
-jest.dontMock '../src/object.coffee'
+jest.dontMock '../src/object'
 
-KDObject = require '../src/object.coffee'
+KDObject = require '../src/object'
 
 describe 'KDObject', ->
+
+  describe '.include', ->
+
+    class MixinClass
+
+      @staticMember = 'existing'
+
+      @staticMethod = -> 'this is a static method'
+
+      constructor: ->
+
+        @foo = 'bar'
+
+      mixinMethod: -> yes
+
+    class FooObject extends KDObject
+
+      @include MixinClass
+
+
+    it 'includes class/static level members', ->
+
+      expect(FooObject.staticMember).toBe 'existing'
+      expect(FooObject.staticMethod()).toBe 'this is a static method'
+
+
+    it 'includes MixinClass.prototype to own prototype', ->
+
+      foo = new FooObject
+
+      expect(foo.mixinMethod()).toBe yes
+      expect(foo.foo).toBe 'bar'
+
+
+    it "doesn't call constructor when 2nd param is `no`", ->
+
+      class NoCallConstructorObject extends KDObject
+
+        @include MixinClass, no
+
+
+      noCall = new NoCallConstructorObject
+
+      expect(noCall.foo).toBeUndefined()
+
+
+    it 'mixes properties in a way those can be overriden', ->
+
+      class BarObject extends KDObject
+
+        @include MixinClass
+
+        constructor: ->
+
+          @foo = 'qux'
+
+      bar = new BarObject
+
+      expect(bar.foo).toBe 'qux'
+
 
   it 'has defaults', ->
 
