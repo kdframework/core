@@ -132,3 +132,54 @@ describe 'KDObject', ->
       expect(object.qux).toBe 'hello world'
 
 
+  describe '#bound', ->
+
+    class BoundTestObject extends KDObject
+
+      foo: -> 'foo'
+
+    it "throws when method doesn't exist", ->
+
+      object = new BoundTestObject
+      expect(-> object.bound 'bar').toThrow new Error "bound: unknown method! bar"
+
+    it "defines a bound version of method with a prefix with correct context", ->
+
+      object = new BoundTestObject
+      bound = object.bound 'foo'
+
+      expect(object.__bound__foo).toBeDefined()
+      expect(object.__bound__foo()).toBe 'foo'
+
+
+    it "reuses already defined version of bound method, doesn't create new one", ->
+
+      object = new BoundTestObject
+
+      bound = object.bound 'foo'
+      boundAgain = object.bound 'foo'
+
+      expect(bound).toBe boundAgain
+      expect(boundAgain()).toBe 'foo'
+
+
+  describe '#lazyBound', ->
+
+    class TestObject extends KDObject
+
+      foo: (a, b, c) -> 'lazyBound' + a + b + c
+
+    it "throws when method doesn't exist", ->
+
+      object = new TestObject
+      expect(-> object.lazyBound 'bar').toThrow new Error "lazyBound: unknown method! bar"
+
+
+    it "returns a function with bound arguments", ->
+
+      object = new TestObject
+      bound = object.lazyBound 'foo', 'bar', 'baz', 'qux'
+
+      expect(bound()).toBe 'lazyBoundbarbazqux'
+
+

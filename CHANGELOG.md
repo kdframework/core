@@ -1,4 +1,11 @@
 
+0.0.6 / 2015-01-03
+==================
+
+ * package.json: Increase version - 0.0.6
+ * add KDObject#lazyBound
+ * add KDObject#bound
+
 0.0.5 / 2014-12-22
 ==================
 
