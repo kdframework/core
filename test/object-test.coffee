@@ -163,3 +163,23 @@ describe 'KDObject', ->
       expect(boundAgain()).toBe 'foo'
 
 
+  describe '#lazyBound', ->
+
+    class TestObject extends KDObject
+
+      foo: (a, b, c) -> 'lazyBound' + a + b + c
+
+    it "throws when method doesn't exist", ->
+
+      object = new TestObject
+      expect(-> object.lazyBound 'bar').toThrow new Error "lazyBound: unknown method! bar"
+
+
+    it "returns a function with bound arguments", ->
+
+      object = new TestObject
+      bound = object.lazyBound 'foo', 'bar', 'baz', 'qux'
+
+      expect(bound()).toBe 'lazyBoundbarbazqux'
+
+

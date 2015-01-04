@@ -140,7 +140,7 @@ module.exports = class KDObject
    * method and binds the correct context into it.
    * It makes things easier for things like event handlers.
    *
-   * @param {String} method - Prototype method name
+   * @param {String} method - Instance method name
    * @return {Function} a function with the bound context.
   ###
   bound: (method) ->
@@ -155,5 +155,20 @@ module.exports = class KDObject
     Object.defineProperty this, boundMethod, { value: this[method].bind this }
 
     return this[boundMethod]
+
+
+  ###*
+   * Returns a function with given arguments
+   * already passed with the correct context bound.
+   *
+   * @param {String} method - Instance method name
+   * @param {...*} args - Arguments to be passed
+  ###
+  lazyBound: (method, args...) ->
+
+    unless typeof this[method] is 'function'
+      throw new Error "lazyBound: unknown method! #{method}"
+
+    return this[method].bind this, args...
 
 
