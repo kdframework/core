@@ -135,3 +135,25 @@ module.exports = class KDObject
     Object.defineProperty this, property, options
 
 
+  ###*
+   * Defines a cached version of given prototype
+   * method and binds the correct context into it.
+   * It makes things easier for things like event handlers.
+   *
+   * @param {String} method - Prototype method name
+   * @return {Function} a function with the bound context.
+  ###
+  bound: (method) ->
+
+    unless typeof this[method] is 'function'
+      throw new Error "bound: unknown method! #{method}"
+
+    boundMethod = "__bound__#{method}"
+
+    return this[boundMethod]  if this[boundMethod]
+
+    Object.defineProperty this, boundMethod, { value: this[method].bind this }
+
+    return this[boundMethod]
+
+
